@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class Form extends Component {
   render() {
+    // Adicionar a função hasTrunfo
+    const { cardName, cardDescription, cardAttr1, cardAttr2,
+      cardAttr3, cardImage, cardRare, cardTrunfo,
+      isSaveButtonDisabled, onInputChange, onSaveButtonClick } = this.props;
+
     return (
       <main>
         <h2>Adicionar nova carta</h2>
@@ -9,7 +15,13 @@ class Form extends Component {
         <form>
           <label htmlFor="name-input">
             Nome
-            <input type="text" data-testid="name-input" name="cardName" />
+            <input
+              type="text"
+              data-testid="name-input"
+              name="cardName"
+              value={ cardName }
+              onChange={ onInputChange }
+            />
           </label>
 
           <label htmlFor="description-input">
@@ -19,6 +31,8 @@ class Form extends Component {
               cols="30"
               rows="10"
               data-testid="description-input"
+              value={ cardDescription }
+              onChange={ onInputChange }
             />
           </label>
 
@@ -30,6 +44,8 @@ class Form extends Component {
               name="atribute1"
               min="0"
               max="90"
+              value={ cardAttr1 }
+              onChange={ onInputChange }
             />
           </label>
 
@@ -41,6 +57,8 @@ class Form extends Component {
               name="atribute2"
               min="0"
               max="90"
+              value={ cardAttr2 }
+              onChange={ onInputChange }
             />
           </label>
 
@@ -52,17 +70,30 @@ class Form extends Component {
               name="atribute3"
               min="0"
               max="90"
+              value={ cardAttr3 }
+              onChange={ onInputChange }
             />
           </label>
 
           <label htmlFor="image-input">
             Imagem
-            <input type="text" data-testid="image-input" name="image" />
+            <input
+              type="text"
+              data-testid="image-input"
+              name="image"
+              value={ cardImage }
+              onChange={ onInputChange }
+            />
           </label>
 
           <label htmlFor="rare-input">
             Raridade
-            <select name="rarity" data-testid="rare-input">
+            <select
+              name="rarity"
+              data-testid="rare-input"
+              value={ cardRare }
+              onChange={ onInputChange }
+            >
               <option value="normal">Normal</option>
               <option value="raro">Raro</option>
               <option value="muito raro">Muito raro</option>
@@ -71,10 +102,21 @@ class Form extends Component {
 
           <label htmlFor="trunfo-input">
             Super Trunfo
-            <input type="checkbox" data-testid="trunfo-input" name="superTrunfo" />
+            <input
+              type="checkbox"
+              data-testid="trunfo-input"
+              name="superTrunfo"
+              checked={ cardTrunfo }
+              onChange={ onInputChange }
+            />
           </label>
 
-          <button data-testid="save-button" type="button">
+          <button
+            data-testid="save-button"
+            type="button"
+            disabled={ isSaveButtonDisabled }
+            onClick={ onSaveButtonClick }
+          >
             Salvar
           </button>
         </form>
@@ -82,5 +124,20 @@ class Form extends Component {
     );
   }
 }
+
+Form.propTypes = {
+  cardName: PropTypes.string.isRequired,
+  cardDescription: PropTypes.string.isRequired,
+  cardAttr1: PropTypes.string.isRequired,
+  cardAttr2: PropTypes.string.isRequired,
+  cardAttr3: PropTypes.string.isRequired,
+  cardImage: PropTypes.string.isRequired,
+  cardRare: PropTypes.string.isRequired,
+  cardTrunfo: PropTypes.bool.isRequired,
+  // hasTrunfo: PropTypes.bool.isRequired,
+  isSaveButtonDisabled: PropTypes.bool.isRequired,
+  onInputChange: PropTypes.func.isRequired,
+  onSaveButtonClick: PropTypes.func.isRequired,
+};
 
 export default Form;
