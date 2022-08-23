@@ -9,7 +9,7 @@ class Form extends Component {
       isSaveButtonDisabled, onInputChange, onSaveButtonClick } = this.props;
 
     return (
-      <main>
+      <section>
         <h2>Adicionar nova carta</h2>
 
         <form>
@@ -120,7 +120,7 @@ class Form extends Component {
             Salvar
           </button>
         </form>
-      </main>
+      </section>
     );
   }
 }
