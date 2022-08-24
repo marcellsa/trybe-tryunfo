@@ -5,17 +5,17 @@ import Form from './components/Form';
 class App extends React.Component {
   state = {
     cardName: '',
-    description: '',
-    image: '',
-    atribute1: '0',
-    atribute2: '0',
-    atribute3: '0',
-    rarity: 'normal',
-    superTrunfo: false,
+    cardDescription: '',
+    cardAttr1: '0',
+    cardAttr2: '0',
+    cardAttr3: '0',
+    cardImage: '',
+    cardRare: 'normal',
+    cardTrunfo: false,
 
   };
 
-  handleInputChange = (event) => {
+  handleChange = (event) => {
     const { name, value, type, checked } = event.target;
     this.setState({
       [name]: (type === 'checkbox' ? checked : value),
@@ -23,8 +23,8 @@ class App extends React.Component {
   };
 
   render() {
-    const { cardName, description, image, atribute1,
-      atribute2, atribute3, rarity, superTrunfo } = this.state;
+    const { cardName, cardDescription, cardImage, cardAttr1,
+      cardAttr2, cardAttr3, cardRare, cardTrunfo } = this.state;
     return (
       <div>
         <header>
@@ -37,25 +37,25 @@ class App extends React.Component {
 
           <Form
             cardName={ cardName }
-            cardDescription={ description }
-            cardImage={ image }
-            cardAttr1={ atribute1 }
-            cardAttr2={ atribute2 }
-            cardAttr3={ atribute3 }
-            cardRare={ rarity }
-            cardTrunfo={ superTrunfo }
-            onInputChange={ this.handleInputChange }
+            cardDescription={ cardDescription }
+            cardImage={ cardImage }
+            cardAttr1={ cardAttr1 }
+            cardAttr2={ cardAttr2 }
+            cardAttr3={ cardAttr3 }
+            cardRare={ cardRare }
+            cardTrunfo={ cardTrunfo }
+            onInputChange={ this.handleChange }
           />
           <Card
             cardName={ cardName }
-            cardDescription={ description }
-            cardImage={ image }
-            cardAttr1={ atribute1 }
-            cardAttr2={ atribute2 }
-            cardAttr3={ atribute3 }
-            cardRare={ rarity }
-            cardTrunfo={ superTrunfo }
-            onInputChange={ this.handleInputChange }
+            cardDescription={ cardDescription }
+            cardImage={ cardImage }
+            cardAttr1={ cardAttr1 }
+            cardAttr2={ cardAttr2 }
+            cardAttr3={ cardAttr3 }
+            cardRare={ cardRare }
+            cardTrunfo={ cardTrunfo }
+            onInputChange={ this.handleChange }
           />
 
         </main>
