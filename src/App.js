@@ -81,11 +81,33 @@ class App extends React.Component {
     }, () => this.validateSalveButton());
   };
 
-  // handleSaveButton = (event) => {
-  //   event.preventDefault();
-  //   console.log('funcionando');
-  //   this.setState({...this.state.cardsList, cardsList:})
-  // };
+  handleSaveButton = (event) => {
+    event.preventDefault();
+    const { cardName, cardDescription, cardImage, cardAttr1,
+      cardAttr2, cardAttr3, cardRare, cardTrunfo, cardsList } = this.state;
+    cardsList.push({
+      cardName,
+      cardDescription,
+      cardImage,
+      cardAttr1,
+      cardAttr2,
+      cardAttr3,
+      cardRare,
+      cardTrunfo,
+    });
+    this.setState({
+      cardName: '',
+      cardDescription: '',
+      cardAttr1: '0',
+      cardAttr2: '0',
+      cardAttr3: '0',
+      cardImage: '',
+      cardRare: 'normal',
+      cardTrunfo: false,
+      isSaveButtonDisabled: true,
+      cardsList,
+    });
+  };
 
   render() {
     const { cardName, cardDescription, cardImage, cardAttr1,
