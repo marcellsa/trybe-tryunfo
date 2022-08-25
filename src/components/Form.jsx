@@ -6,7 +6,7 @@ class Form extends Component {
     // Adicionar a função hasTrunfo
     const { cardName, cardDescription, cardAttr1, cardAttr2,
       cardAttr3, cardImage, cardRare, cardTrunfo,
-      isSaveButtonDisabled, onInputChange, onSaveButtonClick } = this.props;
+      isSaveButtonDisabled, onInputChange, onSaveButtonClick, hasTrunfo } = this.props;
 
     return (
       <section>
@@ -109,14 +109,19 @@ class Form extends Component {
 
           <label htmlFor="trunfo-input">
             Super Trunfo
-            <input
-              type="checkbox"
-              data-testid="trunfo-input"
-              name="cardTrunfo"
-              checked={ cardTrunfo }
-              onChange={ onInputChange }
-              id="trunfo-input"
-            />
+            {
+              hasTrunfo ? <p>Você já tem um Super Trunfo em seu baralho</p>
+                : (
+                  <input
+                    type="checkbox"
+                    data-testid="trunfo-input"
+                    name="cardTrunfo"
+                    checked={ cardTrunfo }
+                    onChange={ onInputChange }
+                    id="trunfo-input"
+                  />
+                )
+            }
           </label>
 
           <button
