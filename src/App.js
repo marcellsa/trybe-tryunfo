@@ -13,46 +13,79 @@ class App extends React.Component {
     cardRare: 'normal',
     cardTrunfo: false,
     isSaveButtonDisabled: true,
+    cardsList: [],
 
   };
 
-  // validateButton = () => {
-  //   console.log('funcionando');
-  // };
+  validateInputs = (nameInput, descriptionInput, imageInput, rareInput) => (
+    nameInput && descriptionInput && imageInput && rareInput
+  );
+
+  validateSumValuesAtributes = (atribute1, atribute2, atribute3) => {
+    const totalMax = 210;
+    const sum = Number(atribute1) + Number(atribute2) + Number(atribute3);
+    return (sum <= totalMax);
+  };
+
+  validateMinMaxValueAtribute = (atribute1, atribute2, atribute3) => {
+    const minAtributeValue = 0;
+    const maxAtributeValue = 90;
+    const validation = (
+      Number(atribute1) >= minAtributeValue && Number(atribute1) <= maxAtributeValue
+      && Number(atribute2) >= minAtributeValue && Number(atribute2) <= maxAtributeValue
+      && Number(atribute3) >= minAtributeValue && Number(atribute3) <= maxAtributeValue
+    );
+    return validation;
+  };
+
+  validateSalveButton = () => {
+    const { cardName, cardDescription, cardImage, cardAttr1,
+      cardAttr2, cardAttr3, cardRare } = this.state;
+
+    const validationOne = this.validateInputs(
+      cardName,
+      cardDescription,
+      cardImage,
+      cardRare,
+    );
+
+    const validatioTwo = this.validateSumValuesAtributes(
+      cardAttr1,
+      cardAttr2,
+      cardAttr3,
+    );
+
+    const validationThree = (
+      this.validateMinMaxValueAtribute(
+        cardAttr1,
+        cardAttr2,
+        cardAttr3,
+      )
+    );
+
+    if (validationOne && validatioTwo && validationThree) {
+      this.setState({
+        isSaveButtonDisabled: false,
+      });
+    } else {
+      this.setState({
+        isSaveButtonDisabled: true,
+      });
+    }
+  };
 
   handleChange = (event) => {
     const { name, value, type, checked } = event.target;
     this.setState({
       [name]: (type === 'checkbox' ? checked : value),
-    }, () => {
-      const { cardName, cardDescription, cardImage, cardAttr1,
-        cardAttr2, cardAttr3, cardRare } = this.state;
-
-      const condition1 = cardName && cardDescription && cardImage && cardRare;
-
-      const sum = Number(cardAttr1) + Number(cardAttr2) + Number(cardAttr3);
-      const totalMax = 210;
-      const condition2 = sum <= totalMax;
-
-      const minAtributeValue = 0;
-      const maxAtributeValue = 90;
-      const condition3 = (
-        Number(cardAttr1) >= minAtributeValue && Number(cardAttr1) <= maxAtributeValue
-        && Number(cardAttr2) >= minAtributeValue && Number(cardAttr2) <= maxAtributeValue
-        && Number(cardAttr3) >= minAtributeValue && Number(cardAttr3) <= maxAtributeValue
-      );
-
-      if (condition1 && condition2 && condition3) {
-        this.setState({
-          isSaveButtonDisabled: false,
-        });
-      } else {
-        this.setState({
-          isSaveButtonDisabled: true,
-        });
-      }
-    });
+    }, () => this.validateSalveButton());
   };
+
+  // handleSaveButton = (event) => {
+  //   event.preventDefault();
+  //   console.log('funcionando');
+  //   this.setState({...this.state.cardsList, cardsList:})
+  // };
 
   render() {
     const { cardName, cardDescription, cardImage, cardAttr1,
@@ -78,6 +111,7 @@ class App extends React.Component {
             cardTrunfo={ cardTrunfo }
             onInputChange={ this.handleChange }
             isSaveButtonDisabled={ isSaveButtonDisabled }
+            onSaveButtonClick={ this.handleSaveButton }
           />
           <Card
             cardName={ cardName }
