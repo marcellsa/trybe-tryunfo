@@ -85,7 +85,7 @@ class App extends React.Component {
   handleSaveButton = (event) => {
     event.preventDefault();
     const { cardName, cardDescription, cardImage, cardAttr1,
-      cardAttr2, cardAttr3, cardRare, cardTrunfo, hasTrunfo } = this.state;
+      cardAttr2, cardAttr3, cardRare, cardTrunfo } = this.state;
     if (cardTrunfo) {
       this.setState((previousState) => ({
         cardName: '',
