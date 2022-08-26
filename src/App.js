@@ -136,6 +136,22 @@ class App extends React.Component {
     }
   };
 
+  handleDeleteButton = (objCard) => {
+    const { cardsList } = this.state;
+    const filtered = cardsList.filter((card) => card.cardName !== objCard.cardName);
+    if (objCard.cardTrunfo) {
+      this.setState({
+        cardsList: filtered,
+        cardTrunfo: false,
+        hasTrunfo: false,
+      });
+    } else {
+      this.setState({
+        cardsList: filtered,
+      });
+    }
+  };
+
   render() {
     const { cardName, cardDescription, cardImage, cardAttr1,
       cardAttr2, cardAttr3, cardRare, cardTrunfo,
@@ -189,6 +205,16 @@ class App extends React.Component {
                   cardRare={ card.cardRare }
                   cardTrunfo={ card.cardTrunfo }
                 />
+
+                <button
+                  data-testid="delete-button"
+                  type="button"
+                  onClick={ () => this.handleDeleteButton(card) }
+                >
+                  Excluir
+
+                </button>
+
               </div>))
           }
 
